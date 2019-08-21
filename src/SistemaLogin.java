@@ -51,11 +51,11 @@ public class SistemaLogin {
         lblSenha.setForeground(Color.BLUE);
 
         //Txf do Login
-        txfLogin.setColumns(10);
+        txfLogin.setColumns(9);
         txfLogin.setToolTipText("Campo para digitar o Login");
 
         //Psf da Senha
-        psfSenha.setColumns(10);
+        psfSenha.setColumns(9);
         psfSenha.setToolTipText("Campo para digitar a Senha");
 
         //Botão Cadastrar
@@ -78,7 +78,7 @@ public class SistemaLogin {
             }else{
                 //JOptionPane.showMessageDialog(tela,"Login realizado com sucesso!");
                 tela.setVisible(false);
-                new Programa(nome);
+                new Program();
             }
         });
 
@@ -92,9 +92,9 @@ public class SistemaLogin {
         panel.setBackground(Color.green);
         panel.setLayout(new GridBagLayout());
         //panel.add(lblBemVindo);
-        panel.add(lblLogin,fillGrid);
+        panel.add(lblLogin);
         panel.add(txfLogin,quebraLinha);
-        panel.add(lblSenha,fillGrid);
+        panel.add(lblSenha);
         panel.add(psfSenha,quebraLinha);
         panel.add(btnCadastrar,fillGrid);
         panel.add(btnLogar,fillGrid);
