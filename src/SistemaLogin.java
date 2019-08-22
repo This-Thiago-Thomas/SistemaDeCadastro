@@ -78,7 +78,7 @@ public class SistemaLogin {
             }else{
                 //JOptionPane.showMessageDialog(tela,"Login realizado com sucesso!");
                 tela.setVisible(false);
-                new Program();
+                //new Program();
             }
         });
 
