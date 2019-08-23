@@ -2,3 +2,8 @@
 out
 README.md
 SistemaDeCadastro.iml
+
+.classpath
+.project
+.settings
+bin/
