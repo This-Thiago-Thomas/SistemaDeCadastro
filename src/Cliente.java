@@ -56,4 +56,10 @@ public class Cliente {
     public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
+
+    public Object[] arrayCliente(){
+        Object[] arrayCli = {this.getNome(), this.getCpf(), this.getEmail(), this.getTelefone(), this.getSaldo()};
+        return arrayCli;
+    }
+
 }

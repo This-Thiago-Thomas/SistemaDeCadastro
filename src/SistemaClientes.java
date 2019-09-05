@@ -29,4 +29,15 @@ public class SistemaClientes extends LinkedList<Cliente>{
         return this.remove(cliente);
     }
 
+    public Object[][] tabelarLista(){
+
+        Object[][] tabelaCliente = new Object[this.size()][5];
+
+        for(int x = 0; x < this.size(); x++){
+            tabelaCliente[x] = this.get(x).arrayCliente();
+        }
+
+        return tabelaCliente;
+    }
+
 }
