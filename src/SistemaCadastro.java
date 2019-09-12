@@ -6,6 +6,7 @@
 //import javax.swing.event.TableModelListener;
 //import javax.swing.table.DefaultTableModel;
 //import javax.swing.table.TableModel;
+import javax.swing.*;
 import java.awt.Dimension;
 
 /**
@@ -66,7 +67,20 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pnCpf.add(lblCpf);
         pnCpf.add(txfCPf);
 
-        btnCpf.setLabel("Procurar");
+        btnCpf.setText("Procurar");
+        btnCpf.addActionListener(actionEvent -> {
+            try{
+                String cpf = txfCPf.getText();
+                if(!cpf.matches("[0-9]{11}")){
+                    throw new Exception(String.valueOf(cpf.length()));
+                }else{
+                    JOptionPane.showMessageDialog(this,"Cpf Válido");
+                }
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this,"Cpf Invalido!");
+            }
+        });
+
         pnCpf.add(btnCpf);
 
         pnBotoes.setLayout(new java.awt.GridLayout(1, 0, 5, 0));
