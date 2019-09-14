@@ -1,12 +1,12 @@
 public class Cliente {
 
     private String nome;
-    private int cpf;
+    private String cpf;
     private String email;
     private int telefone;
     private float saldo;
 
-    public Cliente(String nome, int cpf, String email, int telefone, float saldo) {
+    public Cliente(String nome, String cpf, String email, int telefone, float saldo) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
@@ -25,11 +25,11 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

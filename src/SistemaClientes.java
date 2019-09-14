@@ -12,12 +12,12 @@ public class SistemaClientes extends LinkedList<Cliente>{
         return this.add(cliente);
     }
 
-    public Cliente procurarCliente(int cpf){
+    public Cliente procurarCliente(String cpf){
         if(this.size() == 0){
             return null;
         }else {
             for(int i = 0; i < this.size(); i++){
-                if (this.get(i).getCpf() == cpf){
+                if (this.get(i).getCpf().equals(cpf)){
                     return this.get(i);
                 }
             }

@@ -7,6 +7,7 @@
 //import javax.swing.table.DefaultTableModel;
 //import javax.swing.table.TableModel;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.Dimension;
 
 /**
@@ -16,9 +17,10 @@ import java.awt.Dimension;
 public class SistemaCadastro extends javax.swing.JFrame {
 
     //Teste Cliente
-    Cliente moises = new Cliente("moises",123, "moises@live.com", 12369, 10);
-    Cliente oie = new Cliente("Caveira",69,"renokinha@live.com",999,10);
+    Cliente moises = new Cliente("moises","10393639460", "moises@live.com", 12369, 10);
+    Cliente oie = new Cliente("Caveira","12345678900","renokinha@live.com",999,10);
     SistemaClientes sis = new SistemaClientes();
+    DefaultTableModel tblDados;
 
     /**
      * Creates new form NewJFrame
@@ -27,9 +29,8 @@ public class SistemaCadastro extends javax.swing.JFrame {
         //Teste Cliente 2
         sis.novoCliente(moises);
         sis.novoCliente(oie);
-        sis.novoCliente(oie);
         initComponents();
-        setPreferredSize(new Dimension(1024,760));
+        setPreferredSize(new Dimension(1024,768));
         setLocationRelativeTo(null);
     }
 
@@ -69,15 +70,26 @@ public class SistemaCadastro extends javax.swing.JFrame {
 
         btnCpf.setText("Procurar");
         btnCpf.addActionListener(actionEvent -> {
-            try{
+            try {
                 String cpf = txfCPf.getText();
-                if(!cpf.matches("[0-9]{11}")){
-                    throw new Exception(String.valueOf(cpf.length()));
-                }else{
-                    JOptionPane.showMessageDialog(this,"Cpf Válido");
+                if(cpf.isEmpty()){
+                    tblCli.setModel(tabelaDados());
+                }else {
+                    if (!this.validarCpf(cpf)) {
+                        throw new Exception("Erro! CPF Inválido!");
+                    } else {
+                        Cliente cli = this.sis.procurarCliente(cpf);
+                        if (cli == null) {
+                            throw new Exception("Não existe ninguem com esse CPF!");
+                        } else {
+                            tblDados.setNumRows(0);
+                            tblDados.addRow(cli.arrayCliente());
+                            tblCli.setModel(tblDados);
+                        }
+                    }
                 }
             }catch(Exception e){
-                JOptionPane.showMessageDialog(this,"Cpf Invalido!");
+                JOptionPane.showMessageDialog(this,e.getMessage());
             }
         });
 
@@ -99,7 +111,7 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pnlMenuLayout.setHorizontalGroup(
                 pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnlMenuLayout.createSequentialGroup()
-                                .addComponent(pnCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(pnBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -115,20 +127,8 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pnlListaCli.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Clientes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         pnlListaCli.setLayout(new javax.swing.BoxLayout(pnlListaCli, javax.swing.BoxLayout.LINE_AXIS));
 
-        tblCli.setModel(new javax.swing.table.DefaultTableModel(
-                sis.tabelarLista(), //Teste na tabela.
-                new String [] {
-                        "Nome", "CPF", "E-mail", "Telefone", "Saldo"
-                }
-        ) {
-            Class[] types = new Class [] {
-                    java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
-            };
+        tblCli.setModel(tabelaDados());
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
         jScrollPane1.setViewportView(tblCli);
         if (tblCli.getColumnModel().getColumnCount() > 0) {
             tblCli.getColumnModel().getColumn(0).setResizable(false);
@@ -162,6 +162,41 @@ public class SistemaCadastro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>
+
+    private boolean validarCpf(String cpf){
+        if(!cpf.matches("[0-9]{11}")){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    //Gera a Tabela de Dados Padrão
+    private DefaultTableModel tabelaDados(){
+        this.tblDados = new DefaultTableModel(
+                sis.tabelarLista(), //Teste na tabela.
+                new String [] {
+                        "Nome", "CPF", "E-mail", "Telefone", "Saldo"
+                }
+        ) {
+            Class[] types = new Class [] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            boolean[] canEdit = new boolean [] {
+                    false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        };
+        return tblDados;
+    }
 
     /**
      * @param args the command line arguments
