@@ -2,8 +2,10 @@
 out
 README.md
 SistemaDeCadastro.iml
-
 .classpath
 .project
 .settings
 bin/
+.gitignore
+pasta_teste/
+logins.txt
