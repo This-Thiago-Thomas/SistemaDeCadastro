@@ -71,6 +71,8 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pnCpf.add(txfCPf);
 
         btnCpf.setText("Procurar");
+
+        //Função do Botão de Procurar Cliente
         btnCpf.addActionListener(actionEvent -> {
             try {
                 String cpf = txfCPf.getText();
@@ -78,7 +80,7 @@ public class SistemaCadastro extends javax.swing.JFrame {
                     tblCli.setModel(tabelaDados());
                 }else {
                     if (!this.validarCpf(cpf)) {
-                        throw new Exception("Erro! CPF Inválido!");
+                        throw new Exception("CPF Inválido!");
                     } else {
                         Cliente cli = this.sis.procurarCliente(cpf);
                         if (cli == null) {
@@ -91,7 +93,7 @@ public class SistemaCadastro extends javax.swing.JFrame {
                     }
                 }
             }catch(Exception e){
-                JOptionPane.showMessageDialog(this,e.getMessage());
+                JOptionPane.showMessageDialog(this,e.getMessage(),"Erro!", JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -106,6 +108,22 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pnBotoes.add(btnEditCli);
 
         btnExcluiCli.setText("Excluir Cliente");
+
+        //Função do Botão de Remover Cliente
+        btnExcluiCli.addActionListener(actionEvent -> {
+            if(tblCli.getSelectedRow() == -1){
+                JOptionPane.showMessageDialog(this,"Cliente não selecionado!","Erro!", JOptionPane.ERROR_MESSAGE);
+            }else{
+                int excluir = JOptionPane.showConfirmDialog(this, "Você tem certeza que quer excluir esse cliente?","Excluir Cliente", JOptionPane.YES_NO_OPTION);
+                if(excluir == 0){
+                    sis.remove(tblCli.getSelectedRow());
+                    JOptionPane.showMessageDialog(this, "Cliente Excluido Com Sucesso!");
+                    tblCli.setModel(tabelaDados());
+                }
+
+            }
+        });
+
         pnBotoes.add(btnExcluiCli);
 
         javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
@@ -165,6 +183,7 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
+    //Validação do CPF
     private boolean validarCpf(String cpf){
         if(!cpf.matches("[0-9]{11}")){
             return false;
