@@ -18,9 +18,10 @@ public class SistemaCadastro extends javax.swing.JFrame {
 
     //Teste Cliente
     Cliente moises = new Cliente("moises","10393639460", "moises@live.com", 12369, 10);
-    Cliente oie = new Cliente("Caveira","12345678900","renokinha@live.com",999,10);
+    Cliente oie = new Cliente("Caveira","12345678900","renokinNHÁ@live.com",999,10);
     SistemaClientes sis = new SistemaClientes();
     DefaultTableModel tblDados;
+    JFrame telaNovoCli = new NovoCliente();
 
     /**
      * Creates new form NewJFrame
@@ -102,6 +103,14 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pnBotoes.setLayout(new java.awt.GridLayout(1, 0, 5, 0));
 
         btnNovoCli.setText("Novo Cliente");
+        btnNovoCli.addActionListener(actionEvent -> {
+            if(telaNovoCli.isVisible()){
+                JOptionPane.showMessageDialog(this,"Finalize o cadastro anterior!","Erro!", JOptionPane.ERROR_MESSAGE);
+            }else{
+                telaNovoCli.setVisible(true);
+            }
+        });
+
         pnBotoes.add(btnNovoCli);
 
         btnEditCli.setText("Editar Cliente");
@@ -220,7 +229,7 @@ public class SistemaCadastro extends javax.swing.JFrame {
     }
 
     //Desing do Nimbus no Swing
-    private void nimbusDesing(){
+    public static void nimbusDesing(){
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
