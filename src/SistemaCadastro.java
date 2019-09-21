@@ -17,8 +17,9 @@ import java.awt.Dimension;
 public class SistemaCadastro extends javax.swing.JFrame {
 
     //Teste Cliente
-    Cliente moises = new Cliente("moises","10393639460", "moises@live.com", 12369, 10);
-    Cliente oie = new Cliente("Caveira","12345678900","renokinNHÁ@live.com",999,10);
+    Cliente cli1 = new Cliente("moises","10393639460", "moises@live.com", 12369, 10);
+    Cliente cli2 = new Cliente("Caveira","12345678900","caveira@live.com",999,10);
+    Cliente cli3 = new Cliente("Carlos","55563412060","carlos.buceta@hotmail.com",969696969,100);
     SistemaClientes sis = new SistemaClientes();
     DefaultTableModel tblDados;
     JFrame telaNovoCli = new NovoCliente();
@@ -29,8 +30,9 @@ public class SistemaCadastro extends javax.swing.JFrame {
     public SistemaCadastro() {
         //Teste Cliente 2
         nimbusDesing();
-        sis.novoCliente(moises);
-        sis.novoCliente(oie);
+        sis.novoCliente(cli1);
+        sis.novoCliente(cli2);
+        sis.novoCliente(cli3);
         initComponents();
         setPreferredSize(new Dimension(1024,768));
         setLocationRelativeTo(null);
@@ -125,11 +127,11 @@ public class SistemaCadastro extends javax.swing.JFrame {
             }else{
                 int excluir = JOptionPane.showConfirmDialog(this, "Você tem certeza que quer excluir esse cliente?","Excluir Cliente", JOptionPane.YES_NO_OPTION);
                 if(excluir == 0){
-                    sis.remove(tblCli.getSelectedRow());
+                    String cpf = tblCli.getValueAt(tblCli.getSelectedRow(),1).toString();
+                    sis.removerCliente(cpf);
                     JOptionPane.showMessageDialog(this, "Cliente Excluido Com Sucesso!");
                     tblCli.setModel(tabelaDados());
                 }
-
             }
         });
 

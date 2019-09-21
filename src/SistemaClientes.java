@@ -25,8 +25,8 @@ public class SistemaClientes extends LinkedList<Cliente>{
         return null;
     }
 
-    public boolean removerCliente(Cliente cliente){
-        return this.remove(cliente);
+    public boolean removerCliente(String cpf){
+        return this.remove(procurarCliente(cpf));
     }
 
     public Object[][] tabelarLista(){
