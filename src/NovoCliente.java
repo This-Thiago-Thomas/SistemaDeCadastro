@@ -1,4 +1,4 @@
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class NovoCliente extends JFrame{
 
@@ -28,7 +28,7 @@ public class NovoCliente extends JFrame{
         txfTelefone = new javax.swing.JTextField();
         lblSaldo = new javax.swing.JLabel();
         txfSaldo = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -45,10 +45,48 @@ public class NovoCliente extends JFrame{
 
         lblSaldo.setText("Saldo:");
 
-        jButton1.setText("Limpar");
-        jButton1.setPreferredSize(new java.awt.Dimension(75, 34));
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(actionEvent -> {
+           limparCampos();
+        });
+        btnLimpar.setPreferredSize(new java.awt.Dimension(75, 34));
 
         btnOk.setText("OK");
+        btnOk.addActionListener(actionEvent -> {
+            try{
+                if(!validaNome(txfNome.getText())){
+                    throw new Exception("Nome Incorreto!");
+                }
+                if(!validaCpf(txfCPF.getText())){
+                    throw new Exception("CPF Incorreto!");
+                }
+                if(!validaEmail(txfEmail.getText())){
+                    throw new Exception("Email Incorreto!");
+                }
+                if(!validaTelefone(txfTelefone.getText())){
+                    throw new Exception("Telefone Incorreto!");
+                }
+                if(!validaSaldo(txfSaldo.getText())){
+                    throw new Exception("Saldo Incorreto!");
+                }
+
+                if(SistemaCadastro.sis.procurarCliente(txfCPF.getText()) != null){
+                    throw new Exception("Cliente Já Cadastrado!");
+                }
+
+                Cliente novoCli = new Cliente(txfNome.getText(),txfCPF.getText(),txfEmail.getText(),txfTelefone.getText(),
+                        Float.parseFloat(txfSaldo.getText()));
+
+                SistemaCadastro.sis.novoCliente(novoCli);
+
+                JOptionPane.showMessageDialog(this, "Cliente Criado Com Sucesso!");
+
+                setVisible(false);
+                limparCampos();
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this,e.getMessage(),"Erro!",JOptionPane.ERROR_MESSAGE);
+            }
+        });
         btnOk.setPreferredSize(new java.awt.Dimension(75, 34));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -81,7 +119,7 @@ public class NovoCliente extends JFrame{
                                 .addContainerGap())
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(30, 30, 30)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)
                                 .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(30, Short.MAX_VALUE))
@@ -111,7 +149,7 @@ public class NovoCliente extends JFrame{
                                         .addComponent(txfSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -136,9 +174,40 @@ public class NovoCliente extends JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Inicio das Validações
+    boolean validaNome(String nome){
+        return nome.matches("([a-zA-Z]{3,})");
+    }
+
+    boolean validaCpf(String cpf){
+        return SistemaCadastro.validarCpf(cpf);
+    }
+
+    boolean validaEmail(String email){
+        return (Character.isAlphabetic(email.charAt(0))) && email.matches(
+                "([a-zA-Z0-9._-]{3,}+@{1}+[a-zA-Z0-9]{2,}+\\.{1}+[a-zA-Z]{2,})||([a-zA-Z0-9._-]{3,}+@{1}+[a-zA-Z0-9]{2,}+\\.{1}+[a-zA-Z]{2,}+\\.{1}+[a-zA-Z]{2})");
+    }
+
+    boolean validaTelefone(String telefone){
+        return telefone.charAt(0)!= 0 && telefone.matches("([0-9]{9})");
+    }
+
+    boolean validaSaldo(String saldo){
+        return saldo.charAt(0)!= 0 && saldo.matches("([0-9])||([0-9]+\\.{1}+[0-9])");
+    }
+    //Fim das Validações
+
+    void limparCampos(){
+        txfNome.setText("");
+        txfCPF.setText("");
+        txfEmail.setText("");
+        txfSaldo.setText("");
+        txfTelefone.setText("");
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblEmail;

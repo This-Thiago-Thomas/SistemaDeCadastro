@@ -3,10 +3,10 @@ public class Cliente {
     private String nome;
     private String cpf;
     private String email;
-    private int telefone;
+    private String telefone;
     private float saldo;
 
-    public Cliente(String nome, String cpf, String email, int telefone, float saldo) {
+    public Cliente(String nome, String cpf, String email, String telefone, float saldo) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
@@ -41,11 +41,11 @@ public class Cliente {
         this.email = email;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 

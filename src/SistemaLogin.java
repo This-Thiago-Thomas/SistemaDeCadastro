@@ -102,6 +102,7 @@ public class SistemaLogin {
         panel.setBorder(new LineBorder(new Color(0,0,0),3));
 
         //Montagem dos Componentes
+        SistemaCadastro.nimbusDesing();
         panelDoFrame.add(panel);
         tela.add(panelDoFrame);
         //tela.pack();

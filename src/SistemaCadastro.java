@@ -17,10 +17,10 @@ import java.awt.Dimension;
 public class SistemaCadastro extends javax.swing.JFrame {
 
     //Teste Cliente
-    Cliente cli1 = new Cliente("moises","10393639460", "moises@live.com", 12369, 10);
-    Cliente cli2 = new Cliente("Caveira","12345678900","caveira@live.com",999,10);
-    Cliente cli3 = new Cliente("Carlos","55563412060","carlos.buceta@hotmail.com",969696969,100);
-    SistemaClientes sis = new SistemaClientes();
+    Cliente cli1 = new Cliente("moises","10393639460", "moises@live.com", "12369", 10);
+    Cliente cli2 = new Cliente("Caveira","12345678900","caveira@live.com","999",10);
+    Cliente cli3 = new Cliente("Carlos","55563412060","carlos.buceta@hotmail.com","969696969",100);
+    public static SistemaClientes sis = new SistemaClientes();
     DefaultTableModel tblDados;
     JFrame telaNovoCli = new NovoCliente();
 
@@ -105,6 +105,8 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pnBotoes.setLayout(new java.awt.GridLayout(1, 0, 5, 0));
 
         btnNovoCli.setText("Novo Cliente");
+
+        //Função do Botão de Novo Cliente
         btnNovoCli.addActionListener(actionEvent -> {
             if(telaNovoCli.isVisible()){
                 JOptionPane.showMessageDialog(this,"Finalize o cadastro anterior!","Erro!", JOptionPane.ERROR_MESSAGE);
@@ -195,12 +197,8 @@ public class SistemaCadastro extends javax.swing.JFrame {
     }// </editor-fold>
 
     //Validação do CPF
-    private boolean validarCpf(String cpf){
-        if(!cpf.matches("[0-9]{11}")){
-            return false;
-        }else {
-            return true;
-        }
+    static boolean validarCpf(String cpf){
+        return cpf.matches("[0-9]{11}");
     }
 
     //Gera a Tabela de Dados Padrão
@@ -212,7 +210,7 @@ public class SistemaCadastro extends javax.swing.JFrame {
                 }
         ) {
             Class[] types = new Class [] {
-                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
             };
 
             boolean[] canEdit = new boolean [] {
