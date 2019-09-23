@@ -17,10 +17,10 @@ import java.awt.Dimension;
 public class SistemaCadastro extends javax.swing.JFrame {
 
     //Teste Cliente
-    Cliente cli1 = new Cliente("moises","10393639460", "moises@live.com", "12369", 10);
-    Cliente cli2 = new Cliente("Caveira","12345678900","caveira@live.com","999",10);
-    Cliente cli3 = new Cliente("Carlos","55563412060","carlos.buceta@hotmail.com","969696969",100);
-    public static SistemaClientes sis = new SistemaClientes();
+    Cliente cli1 = new Cliente("Moises","10393639460", "moises@live.com", "888888888", 10);
+    Cliente cli2 = new Cliente("Caveira","12345678900","caveira@live.com","999999999",10);
+    Cliente cli3 = new Cliente("Carlos","55563412060","carlos@hotmail.com","969696969",100);
+    static SistemaClientes sis = new SistemaClientes();
     DefaultTableModel tblDados;
     JFrame telaNovoCli = new NovoCliente();
 
@@ -74,7 +74,6 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pnCpf.add(txfCPf);
 
         btnCpf.setText("Procurar");
-
         //Função do Botão de Procurar Cliente
         btnCpf.addActionListener(actionEvent -> {
             try {
@@ -105,7 +104,6 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pnBotoes.setLayout(new java.awt.GridLayout(1, 0, 5, 0));
 
         btnNovoCli.setText("Novo Cliente");
-
         //Função do Botão de Novo Cliente
         btnNovoCli.addActionListener(actionEvent -> {
             if(telaNovoCli.isVisible()){
@@ -118,10 +116,18 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pnBotoes.add(btnNovoCli);
 
         btnEditCli.setText("Editar Cliente");
+        btnEditCli.addActionListener(actionEvent ->{
+            if (tblCli.getSelectedRow() == -1) {
+                JOptionPane.showMessageDialog(this, "Cliente não selecionado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String cpf = tblCli.getValueAt(tblCli.getSelectedRow(),1).toString();
+                new EditarCliente(sis.procurarCliente(cpf)).setVisible(true);
+            }
+        });
         pnBotoes.add(btnEditCli);
 
-        btnExcluiCli.setText("Excluir Cliente");
 
+        btnExcluiCli.setText("Excluir Cliente");
         //Função do Botão de Remover Cliente
         btnExcluiCli.addActionListener(actionEvent -> {
             if(tblCli.getSelectedRow() == -1){

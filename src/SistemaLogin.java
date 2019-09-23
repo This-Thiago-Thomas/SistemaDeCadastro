@@ -1,13 +1,16 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class SistemaLogin {
+public class SistemaLogin{
     Scanner leia = new Scanner(System.in);
     JFrame tela = new JFrame();
     JPanel panelDoFrame = new JPanel();
@@ -70,6 +73,7 @@ public class SistemaLogin {
         //Botão Logar
         btnLogar.setText("Logar!");
         btnLogar.setSize(30,30);
+        btnLogar.setMnemonic(KeyEvent.VK_ENTER);
         btnLogar.addActionListener(actionEvent -> {
             String nome = txfLogin.getText();
             String senha = String.valueOf(psfSenha.getPassword());

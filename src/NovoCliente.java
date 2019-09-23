@@ -176,7 +176,7 @@ public class NovoCliente extends JFrame{
 
     //Inicio das Validações
     boolean validaNome(String nome){
-        return nome.matches("([a-zA-Z]{3,})");
+        return nome.matches("([a-zA-Z ]{2,})");
     }
 
     boolean validaCpf(String cpf){
@@ -193,7 +193,7 @@ public class NovoCliente extends JFrame{
     }
 
     boolean validaSaldo(String saldo){
-        return saldo.charAt(0)!= 0 && saldo.matches("([0-9])||([0-9]+\\.{1}+[0-9])");
+        return saldo.charAt(0)!= 0 && saldo.matches("([0-9]{1,})||([0-9]{1,}+\\.{1}+[0-9]{2})");
     }
     //Fim das Validações
 
@@ -206,18 +206,18 @@ public class NovoCliente extends JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnOk;
-    private javax.swing.JButton btnLimpar;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblCPF;
-    private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblSaldo;
-    private javax.swing.JLabel lblTelefone;
-    private javax.swing.JTextField txfCPF;
-    private javax.swing.JTextField txfEmail;
-    private javax.swing.JTextField txfNome;
-    private javax.swing.JTextField txfSaldo;
-    private javax.swing.JTextField txfTelefone;
+    protected javax.swing.JButton btnOk;
+    protected javax.swing.JButton btnLimpar;
+    protected javax.swing.JPanel jPanel1;
+    protected javax.swing.JLabel lblCPF;
+    protected javax.swing.JLabel lblEmail;
+    protected javax.swing.JLabel lblNome;
+    protected javax.swing.JLabel lblSaldo;
+    protected javax.swing.JLabel lblTelefone;
+    protected javax.swing.JTextField txfCPF;
+    protected javax.swing.JTextField txfEmail;
+    protected javax.swing.JTextField txfNome;
+    protected javax.swing.JTextField txfSaldo;
+    protected javax.swing.JTextField txfTelefone;
     // End of variables declaration//GEN-END:variables
 }
