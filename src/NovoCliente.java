@@ -30,6 +30,7 @@ public class NovoCliente extends JFrame{
         txfSaldo = new javax.swing.JTextField();
         btnLimpar = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
+        btnOkEditar = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setTitle("Novo Cliente");
@@ -89,6 +90,11 @@ public class NovoCliente extends JFrame{
         });
         btnOk.setPreferredSize(new java.awt.Dimension(75, 34));
 
+        btnOkEditar.setText("OK");
+        btnOkEditar.setPreferredSize(new java.awt.Dimension(75, 34));
+        btnOkEditar.setVisible(false);
+
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -122,6 +128,7 @@ public class NovoCliente extends JFrame{
                                 .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)
                                 .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnOkEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -150,7 +157,8 @@ public class NovoCliente extends JFrame{
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnOkEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -193,7 +201,7 @@ public class NovoCliente extends JFrame{
     }
 
     boolean validaSaldo(String saldo){
-        return saldo.charAt(0)!= 0 && saldo.matches("([0-9]{1,})||([0-9]{1,}+\\.{1}+[0-9]{2})");
+        return saldo.charAt(0)!= 0 && saldo.matches("([0-9]+)||([0-9]+\\.[0-9]+)");
     }
     //Fim das Validações
 
@@ -219,5 +227,6 @@ public class NovoCliente extends JFrame{
     protected javax.swing.JTextField txfNome;
     protected javax.swing.JTextField txfSaldo;
     protected javax.swing.JTextField txfTelefone;
+    protected JButton btnOkEditar;
     // End of variables declaration//GEN-END:variables
 }

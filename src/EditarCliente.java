@@ -17,7 +17,9 @@ public class EditarCliente extends NovoCliente{
         this.txfTelefone.setText(cliSelecionado.getTelefone());
         this.txfSaldo.setText(Float.toString(cliSelecionado.getSaldo()));
 
-        btnOk.addActionListener(actionEvent -> {
+        btnOk.setVisible(false);
+
+        btnOkEditar.addActionListener(actionEvent -> {
             try{
                 if(!validaNome(txfNome.getText())){
                     throw new Exception("Nome Incorreto!");
@@ -36,7 +38,7 @@ public class EditarCliente extends NovoCliente{
                 }
 
                 if(SistemaCadastro.sis.procurarCliente(txfCPF.getText()) != null){
-                    if(txfCPF.getText() != cliSelecionado.getCpf()){
+                    if(!txfCPF.getText().equals(cliSelecionado.getCpf())){
                         throw new Exception("Já Existe Alguem com esse CPF Cadastrado!");
                     }
                 }
@@ -55,6 +57,8 @@ public class EditarCliente extends NovoCliente{
                 JOptionPane.showMessageDialog(this,e.getMessage(),"Erro!",JOptionPane.ERROR_MESSAGE);
             }
         });
+        btnOkEditar.setVisible(true);
+
     }
 
 
