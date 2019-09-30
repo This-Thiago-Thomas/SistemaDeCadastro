@@ -17,10 +17,7 @@ import java.awt.Dimension;
 public class SistemaCadastro extends javax.swing.JFrame {
 
     //Teste Cliente
-    Cliente cli1 = new Cliente("Moises","10393639460", "moises@live.com", "888888888", 10);
-    Cliente cli2 = new Cliente("Caveira","12345678900","caveira@live.com","999999999",10);
-    Cliente cli3 = new Cliente("Carlos","55563412060","carlos@hotmail.com","969696969",100);
-    static SistemaClientes sis = new SistemaClientes();
+    static SistemaClientes sis = new SistemaClientes(new Cliente("Teste","11111111111", "teste@teste.com", "123456789", 10));
     DefaultTableModel tblDados;
     JFrame telaNovoCli = new NovoCliente();
 
@@ -30,9 +27,6 @@ public class SistemaCadastro extends javax.swing.JFrame {
     public SistemaCadastro() {
         //Teste Cliente 2
         nimbusDesing();
-        sis.novoCliente(cli1);
-        sis.novoCliente(cli2);
-        sis.novoCliente(cli3);
         initComponents();
         setPreferredSize(new Dimension(1024,768));
         setLocationRelativeTo(null);

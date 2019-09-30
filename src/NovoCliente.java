@@ -197,7 +197,7 @@ public class NovoCliente extends JFrame{
     }
 
     boolean validaTelefone(String telefone){
-        return telefone.charAt(0)!= 0 && telefone.matches("([0-9]{9})");
+        return telefone.charAt(0)!= 0 && telefone.matches("([0-9]{8})||([0-9]{9})");
     }
 
     boolean validaSaldo(String saldo){
