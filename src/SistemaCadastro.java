@@ -9,6 +9,11 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Dimension;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
 
 /**
  *
@@ -28,6 +33,7 @@ public class SistemaCadastro extends javax.swing.JFrame {
         //Teste Cliente 2
         nimbusDesing();
         initComponents();
+        testeClientes();
         setPreferredSize(new Dimension(1024,768));
         setLocationRelativeTo(null);
         setVisible(true);
@@ -195,6 +201,18 @@ public class SistemaCadastro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>
+
+    void testeClientes(){
+        try {
+            PrintStream escrever = new PrintStream(new FileOutputStream("clientes.txt", true));
+            Scanner txtNoScanner = new Scanner(new FileInputStream("clientes.txt"));
+            if(!txtNoScanner.hasNextLine()){
+                escrever.println("//Lista de Clientes//");
+            }
+        }catch(FileNotFoundException e) {
+            JOptionPane.showMessageDialog(this, "Erro!");
+        }
+    }
 
     //Validação do CPF
     static boolean validarCpf(String cpf){
