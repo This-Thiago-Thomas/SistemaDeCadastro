@@ -208,6 +208,14 @@ public class SistemaCadastro extends javax.swing.JFrame {
             Scanner txtNoScanner = new Scanner(new FileInputStream("clientes.txt"));
             if(!txtNoScanner.hasNextLine()){
                 escrever.println("//Lista de Clientes//");
+            }else{
+                while(txtNoScanner.hasNextLine()){
+                    if(txtNoScanner.next().equals("NOME:")){
+                        System.out.println(txtNoScanner.nextLine().strip());
+                    }else{
+                        System.out.println("gozou");
+                    }
+                }
             }
         }catch(FileNotFoundException e) {
             JOptionPane.showMessageDialog(this, "Erro!");
