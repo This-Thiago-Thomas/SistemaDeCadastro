@@ -22,7 +22,7 @@ import java.util.Scanner;
 public class SistemaCadastro extends javax.swing.JFrame {
 
     //Teste Cliente
-    static SistemaClientes sis = new SistemaClientes(new Cliente("Teste","11111111111", "teste@teste.com", "123456789", 10));
+    static SistemaClientes sis = new SistemaClientes();
     DefaultTableModel tblDados;
     JFrame telaNovoCli = new NovoCliente();
 
@@ -32,8 +32,8 @@ public class SistemaCadastro extends javax.swing.JFrame {
     public SistemaCadastro() {
         //Teste Cliente 2
         nimbusDesing();
+        pegaClientesDoTxt();
         initComponents();
-        testeClientes();
         setPreferredSize(new Dimension(1024,768));
         setLocationRelativeTo(null);
         setVisible(true);
@@ -202,18 +202,32 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    void testeClientes(){
+    //Método que captura o cliente do txt e coloca para o sistema
+    private void pegaClientesDoTxt(){
         try {
             PrintStream escrever = new PrintStream(new FileOutputStream("clientes.txt", true));
             Scanner txtNoScanner = new Scanner(new FileInputStream("clientes.txt"));
             if(!txtNoScanner.hasNextLine()){
                 escrever.println("//Lista de Clientes//");
             }else{
-                while(txtNoScanner.hasNextLine()){
-                    if(txtNoScanner.next().equals("NOME:")){
-                        System.out.println(txtNoScanner.nextLine().strip());
-                    }else{
-                        System.out.println("gozou");
+                String nome, cpf, email, telefone;
+                nome = cpf = email = telefone = "";
+                float saldo = 0f;
+                String linha;
+                while(txtNoScanner.hasNext()){
+                    linha = txtNoScanner.nextLine();
+                    if(linha.startsWith("NOME:")){
+                        nome = linha.replaceFirst("NOME:","").strip();
+                    }if(linha.startsWith("CPF:")){
+                        cpf = linha.replaceFirst("CPF:","").strip();
+                    }if(linha.startsWith("EMAIL:")){
+                        email = linha.replaceFirst("EMAIL:","").strip();
+                    }if(linha.startsWith("TELEFONE:")){
+                        telefone = linha.replaceFirst("TELEFONE:","").strip();
+                    }if(linha.startsWith("SALDO:")){
+                        saldo = Float.parseFloat(linha.replaceFirst("SALDO:","").strip());
+                        Cliente cli = new Cliente(nome,cpf,email,telefone,saldo);
+                        sis.novoCliente(cli);
                     }
                 }
             }
