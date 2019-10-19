@@ -103,7 +103,7 @@ public class SistemaCadastro extends javax.swing.JFrame {
 
         pnBotoes.setLayout(new java.awt.GridLayout(1, 0, 5, 0));
 
-        btnNovoCli.setText("Novo Cliente");
+        btnNovoCli.setText("Novo");
         //Função do Botão de Novo Cliente
         btnNovoCli.addActionListener(actionEvent -> {
             if(telaNovoCli.isVisible()){
@@ -115,7 +115,7 @@ public class SistemaCadastro extends javax.swing.JFrame {
 
         pnBotoes.add(btnNovoCli);
 
-        btnEditCli.setText("Editar Cliente");
+        btnEditCli.setText("Editar");
         btnEditCli.addActionListener(actionEvent ->{
             if (tblCli.getSelectedRow() == -1) {
                 JOptionPane.showMessageDialog(this, "Cliente não selecionado!", "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -127,7 +127,7 @@ public class SistemaCadastro extends javax.swing.JFrame {
         pnBotoes.add(btnEditCli);
 
 
-        btnExcluiCli.setText("Excluir Cliente");
+        btnExcluiCli.setText("Excluir");
         //Função do Botão de Remover Cliente
         btnExcluiCli.addActionListener(actionEvent -> {
             if(tblCli.getSelectedRow() == -1){
@@ -138,6 +138,7 @@ public class SistemaCadastro extends javax.swing.JFrame {
                     String cpf = tblCli.getValueAt(tblCli.getSelectedRow(),1).toString();
                     sis.removerCliente(cpf);
                     JOptionPane.showMessageDialog(this, "Cliente Excluido Com Sucesso!");
+                    this.atualizaClientesNoTxt();
                     tblCli.setModel(tabelaDados());
                 }
             }
@@ -233,6 +234,24 @@ public class SistemaCadastro extends javax.swing.JFrame {
             }
         }catch(FileNotFoundException e) {
             JOptionPane.showMessageDialog(this, "Erro!");
+        }
+    }
+
+    //Método pra atualizar os dados no txt
+    static void atualizaClientesNoTxt(){
+        try {
+            PrintStream escrever = new PrintStream("clientes.txt");
+            escrever.println("//Lista de Clientes//");
+            for(int x = 0; x < sis.size(); x++){
+                escrever.println("------------");
+                escrever.println("NOME: "+sis.get(x).getNome());
+                escrever.println("CPF: "+sis.get(x).getCpf());
+                escrever.println("EMAIL: "+sis.get(x).getEmail());
+                escrever.println("TELEFONE: "+sis.get(x).getTelefone());
+                escrever.println("SALDO: "+sis.get(x).getSaldo());
+            }
+        }catch(FileNotFoundException e) {
+            System.out.println("Erro!");
         }
     }
 

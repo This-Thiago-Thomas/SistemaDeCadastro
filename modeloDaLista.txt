@@ -1,13 +1,13 @@
-LINHA 00- // Lista de Clientes //
-LINHA 01- -----------
-LINHA 02- NOME:
-LINHA 03- CPF:
-LINHA 04- EMAIL:
-LINHA 05- TELEFONE:
-LINHA 06- SALDO:
-LINHA 07- -----------
-LINHA 08- NOME:
-LINHA 09- CPF:
-LINHA 10- EMAIL:
-LINHA 11- TELEFONE:
-LINHA 12- SALDO:
+//Lista de Clientes//
+-----------
+NOME:
+CPF:
+EMAIL:
+TELEFONE:
+SALDO:
+-----------
+NOME:
+CPF:
+EMAIL:
+TELEFONE:
+SALDO:

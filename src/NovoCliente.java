@@ -81,6 +81,8 @@ public class NovoCliente extends JFrame{
                 SistemaCadastro.sis.novoCliente(novoCli);
 
                 JOptionPane.showMessageDialog(this, "Cliente Criado Com Sucesso!");
+                SistemaCadastro.atualizaClientesNoTxt();
+
 
                 setVisible(false);
                 limparCampos();

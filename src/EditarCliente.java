@@ -50,6 +50,7 @@ public class EditarCliente extends NovoCliente{
                 cliSelecionado.setSaldo(Float.parseFloat(txfSaldo.getText()));
 
                 JOptionPane.showMessageDialog(this, "Cliente Alterado Com Sucesso!");
+                SistemaCadastro.atualizaClientesNoTxt();
 
                 setVisible(false);
                 limparCampos();
